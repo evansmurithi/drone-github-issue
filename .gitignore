@@ -1,0 +1,5 @@
+/release/
+/drone-github-issue*
+
+coverage.out
+.drone.yml
