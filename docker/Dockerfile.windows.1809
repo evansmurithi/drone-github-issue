@@ -1,0 +1,10 @@
+# escape=`
+FROM plugins/base:windows-1809-amd64
+
+LABEL maintainer="Evans Murithi <murithievans80@gmail.com>" `
+  org.label-schema.name="Drone Github Issue" `
+  org.label-schema.vendor="Evans Murithi" `
+  org.label-schema.schema-version="1.0"
+
+ADD release/windows/amd64/drone-github-issue.exe C:/bin/drone-github-issue.exe
+ENTRYPOINT [ "C:\\bin\\drone-github-issue.exe" ]

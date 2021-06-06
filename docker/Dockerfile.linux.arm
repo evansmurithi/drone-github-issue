@@ -1,0 +1,9 @@
+FROM plugins/base:multiarch
+
+LABEL maintainer="Evans Murithi <murithievans80@gmail.com>" \
+  org.label-schema.name="Drone Github Issue" \
+  org.label-schema.vendor="Evans Murithi" \
+  org.label-schema.schema-version="1.0"
+
+ADD release/linux/arm/drone-github-issue /bin/
+ENTRYPOINT [ "/bin/drone-github-issue" ]
