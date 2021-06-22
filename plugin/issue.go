@@ -29,15 +29,15 @@ func (ic *issueClient) createIssue() (*github.Issue, error) {
 
 	if issue != nil {
 		return issue, nil
-	} else {
-		// issue was not found in search, create an issue
-		newIssue, err := ic.newIssue()
-		if err != nil {
-			return nil, fmt.Errorf("failed to create new issue: %w", err)
-		}
-
-		return newIssue, nil
 	}
+
+	// issue was not found in search, create an issue
+	newIssue, err := ic.newIssue()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create new issue: %w", err)
+	}
+
+	return newIssue, nil
 }
 
 // getIssue retrieves an issue if it exists.
@@ -63,10 +63,10 @@ func (ic *issueClient) getIssue() (*github.Issue, error) {
 			"Found issue %d with title `%s`\n", issue.GetID(), ic.Title,
 		)
 		return issues.Issues[0], nil
-	} else {
-		fmt.Println("No issue found with the given title")
-		return nil, nil
 	}
+
+	fmt.Println("No issue found with the given title")
+	return nil, nil
 }
 
 // newIssue creates a new issue.
