@@ -92,7 +92,7 @@ def testing(ctx):
         ],
         "trigger": {
             "ref": [
-                "refs/heads/master",
+                "refs/heads/main",
                 "refs/tags/**",
                 "refs/pull/**",
             ],
@@ -170,7 +170,7 @@ def linux(ctx, arch):
         "depends_on": [],
         "trigger": {
             "ref": [
-                "refs/heads/master",
+                "refs/heads/main",
                 "refs/tags/**",
                 "refs/pull/**",
             ],
@@ -203,7 +203,7 @@ def manifest(ctx):
         "depends_on": [],
         "trigger": {
             "ref": [
-                "refs/heads/master",
+                "refs/heads/main",
                 "refs/tags/**",
             ],
         },
