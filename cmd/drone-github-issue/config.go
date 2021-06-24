@@ -11,7 +11,7 @@ func settingsFlags(settings *plugin.Settings) []cli.Flag {
 		&cli.StringFlag{
 			Name:        "api-key",
 			Usage:       "api key to access github api",
-			EnvVars:     []string{"PLUGIN_API_KEY", "GITHUB_RELEASE_API_KEY", "GITHUB_TOKEN"},
+			EnvVars:     []string{"PLUGIN_API_KEY", "GITHUB_ISSUE_API_KEY", "GITHUB_TOKEN"},
 			Destination: &settings.APIKey,
 		},
 		&cli.StringFlag{
