@@ -29,12 +29,14 @@ func settingsFlags(settings *plugin.Settings) []cli.Flag {
 		&cli.StringSliceFlag{
 			Name:        "assignees",
 			Usage:       "list of github usernames to be assigned to the github issue",
+			Value:       &cli.StringSlice{},
 			EnvVars:     []string{"PLUGIN_ASSIGNEES", "GITHUB_ISSUE_ASSIGNEES"},
 			Destination: &settings.Assignees,
 		},
 		&cli.StringSliceFlag{
 			Name:        "labels",
 			Usage:       "list of labels to assign to the github issue",
+			Value:       &cli.StringSlice{},
 			EnvVars:     []string{"PLUGIN_LABELS", "GITHUB_ISSUE_LABELS"},
 			Destination: &settings.Labels,
 		},
