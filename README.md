@@ -45,6 +45,7 @@ docker run --rm \
     -e GITHUB_ISSUE_API_KEY=xxxx \
     -e GITHUB_ISSUE_TITLE="issue title" \
     -e GITHUB_ISSUE_BODY="issue body" \
+    -e GITHUB_ISSUE_BODY_TEXT_ATTACHMENTS="/path/to/file/to/dump/in/issue,/path/to/another/file" \
     -e GITHUB_ISSUE_ASSIGNEES="user1,user2" \
     -e GITHUB_ISSUE_LABELS="bug" \
     -v $(pwd):$(pwd) \

@@ -13,12 +13,13 @@ import (
 
 // Settings for the plugin.
 type Settings struct {
-	APIKey    string
-	Title     string
-	Body      string
-	Assignees cli.StringSlice
-	Labels    cli.StringSlice
-	BaseURL   string
+	APIKey              string
+	Title               string
+	Body                string
+	BodyTextAttachments cli.StringSlice
+	Assignees           cli.StringSlice
+	Labels              cli.StringSlice
+	BaseURL             string
 
 	baseURL *url.URL
 }
@@ -59,14 +60,15 @@ func (p *Plugin) Execute() error {
 	ghClient.BaseURL = p.settings.baseURL
 
 	ic := issueClient{
-		Client:    ghClient,
-		Context:   p.network.Context,
-		Owner:     p.pipeline.Repo.Owner,
-		Repo:      p.pipeline.Repo.Name,
-		Title:     p.settings.Title,
-		Body:      p.settings.Body,
-		Assignees: p.settings.Assignees.Value(),
-		Labels:    p.settings.Labels.Value(),
+		Client:              ghClient,
+		Context:             p.network.Context,
+		Owner:               p.pipeline.Repo.Owner,
+		Repo:                p.pipeline.Repo.Name,
+		Title:               p.settings.Title,
+		Body:                p.settings.Body,
+		BodyTextAttachments: p.settings.BodyTextAttachments.Value(),
+		Assignees:           p.settings.Assignees.Value(),
+		Labels:              p.settings.Labels.Value(),
 	}
 
 	_, err := ic.createIssue()
