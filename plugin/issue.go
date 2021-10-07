@@ -3,20 +3,22 @@ package plugin
 import (
 	"context"
 	"fmt"
+	"io/ioutil"
 
 	"github.com/google/go-github/v35/github"
 )
 
 // issueClient ties the drone env data and github client together.
 type issueClient struct {
-	Client    *github.Client
-	Context   context.Context
-	Owner     string
-	Repo      string
-	Title     string
-	Body      string
-	Assignees []string
-	Labels    []string
+	Client              *github.Client
+	Context             context.Context
+	Owner               string
+	Repo                string
+	Title               string
+	Body                string
+	BodyTextAttachments []string
+	Assignees           []string
+	Labels              []string
 }
 
 // createIssue creates an issue if one doesn't exist.
@@ -71,9 +73,14 @@ func (ic *issueClient) getIssue() (*github.Issue, error) {
 
 // newIssue creates a new issue.
 func (ic *issueClient) newIssue() (*github.Issue, error) {
+	issueBody, issueBodyErr := ic.getBodyString()
+	if issueBodyErr != nil {
+		return nil, fmt.Errorf("failed to create issue: %w", issueBodyErr)
+	}
+
 	issueReq := &github.IssueRequest{
 		Title:     &ic.Title,
-		Body:      &ic.Body,
+		Body:      &issueBody,
 		Labels:    &ic.Labels,
 		Assignees: &ic.Assignees,
 	}
@@ -91,4 +98,20 @@ func (ic *issueClient) newIssue() (*github.Issue, error) {
 		issue.GetID(), ic.Title,
 	)
 	return issue, nil
+}
+
+// getBody returns the issues body. The function will append the values of the text
+// attachments to the body
+func (ic *issueClient) getBodyString() (string, error) {
+	bodyString := ic.Body
+
+	for _, curAttachment := range ic.BodyTextAttachments {
+		curAttContents, curAttContentsErr := ioutil.ReadFile(curAttachment)
+		if curAttContentsErr != nil {
+			return bodyString, curAttContentsErr
+		}
+		bodyString = fmt.Sprintf("%s\n%s", bodyString, string(curAttContents))
+	}
+
+	return bodyString, nil
 }

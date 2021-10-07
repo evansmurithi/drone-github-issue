@@ -27,6 +27,12 @@ func settingsFlags(settings *plugin.Settings) []cli.Flag {
 			Destination: &settings.Body,
 		},
 		&cli.StringSliceFlag{
+			Name:        "body-text-attachments",
+			Usage:       "list of text attachments to be appended to the issue body, one after the other",
+			EnvVars:     []string{"PLUGIN_BODY_TEXT_ATTACHMENTS", "GITHUB_ISSUE_BODY_TEXT_ATTACHMENTS"},
+			Destination: &settings.BodyTextAttachments,
+		},
+		&cli.StringSliceFlag{
 			Name:        "assignees",
 			Usage:       "list of github usernames to be assigned to the github issue",
 			Value:       &cli.StringSlice{},
