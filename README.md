@@ -42,7 +42,7 @@ docker run --rm \
     -e DRONE_REPO_OWNER=octocat \
     -e DRONE_REPO_NAME=foo \
     -e DRONE_COMMIT_REF=refs/heads/main \
-    -e GITHUB_ISSUE_API_KEY=xxxx \
+    -e GITHUB_ISSUE_API_KEY=xxxx \  # requires `repo.public_repo` scope for public repos and `repo` scope for private repos
     -e GITHUB_ISSUE_TITLE="issue title" \
     -e GITHUB_ISSUE_BODY="issue body" \
     -e GITHUB_ISSUE_BODY_TEXT_ATTACHMENTS="/path/to/file/to/dump/in/issue,/path/to/another/file" \
